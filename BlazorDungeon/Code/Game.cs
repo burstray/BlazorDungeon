@@ -22,8 +22,10 @@ namespace BlazorDungeon.Code
         public short widthDungeon;
         public short heightDungeon;
 
-        public short gameSpeed;
-        public Timer gameTimer;
+        public short mainGameSpeed;
+        public Timer mainGameTimer;
+        public short enemyGameSpeed;
+        public Timer enemyGameTimer;
         Random r = new Random();
 
         public string chPlayer;
@@ -62,37 +64,108 @@ namespace BlazorDungeon.Code
 
             this.highScoresFile = highScoresFile;
 
-            maze = new string[23];
-            maze[0] += "*********************************************************************";
-            maze[1] += "*     *         *         *                 *         *         *   *";
-            maze[2] += "* *** *** * *** ******* * ***** ***** ***** * * ***** * ******* * ***";
-            maze[3] += "* * *   * * * *     *   *     * *     * *   * *     * * *       *   *";
-            maze[4] += "* * *** * * * ***** * ******* * * ***** * ********* * * * ********* *";
-            maze[5] += "* * *   * * * *   *   *   *   * *   * *   *         *   *   *       *";
-            maze[6] += "* * * ***** * * * ******* * ******* * * ***** ************* *** *****";
-            maze[7] += "* *         *   * *       *         *         *           *   *     *";
-            maze[8] += "* * *********** * * * *************** *************** *** *** ***** *";
-            maze[9] += "* *   *       * *   *       *       *   *           *   *   * *     *";
-            maze[10] += "* ***** ***** * ********* *** * *** *** * ********* *** ***** * *****";
-            maze[11] += "* *   *     * *   *     *     *   * *   * *       *   *         *   *";
-            maze[12] += "* * * * ***** *** * ************* *** *** ***** * *** *********** ***";
-            maze[13] += "*   *   *     * * *       *     *       *     * *   *       *   *   *";
-            maze[14] += "* ******* ***** * ***** * * *** ******* ***** * *** ******* * * *** *";
-            maze[15] += "*   *   * *       *   * *   *   *     *     * *   *   *   *   * *   *";
-            maze[16] += "*** *** * * ******* * * * ******* *** ******* ***** * * ******* * ***";
-            maze[17] += "*   *   * *         *   * *       * *       *   *   * *   *     * * *";
-            maze[18] += "* *** *** ********* ******* ******* ******* *** * *** * * * ***** * *";
-            maze[19] += "* *   *   *   *   * *     * *   *         * *   *   * * * *     *   *";
-            maze[20] += "* * * * *** * * * *** *** * * * *** ***** * * ***** * *** ***** *** *";
-            maze[21] += "*   * *     *   *       *     *     *     *         *         *     *";
-            maze[22] += "*********************************************************************";
+            maze = new string[30];
+            //maze[0] += "*********************************************************************";
+            //maze[1] += "*     *         *         *                 *         *         *   *";
+            //maze[2] += "* *** *** * *** ******* * ***** ***** ***** * * ***** * ******* * ***";
+            //maze[3] += "* * *   * * * *     *   *     * *     * *   * *     * * *       *   *";
+            //maze[4] += "* * *** * * * ***** * ******* * * ***** * ********* * * * ********* *";
+            //maze[5] += "* * *   * * * *   *   *   *   * *   * *   *         *   *   *       *";
+            ////maze[6] += "* * * ***** * * * ******* * ******* * * ***** ************* *** *****";
+            //maze[6] += "* * *                                                           *****";
+            //maze[7] += "* *         *   * *       *         *         *           *   *     *";
+            //maze[8] += "* * *********** * * * *************** *************** *** *** ***** *";
+            //maze[9] += "* *   *       * *   *       *       *   *           *   *   * *     *";
+            //maze[10] += "* ***** ***** * ********* *** * *** *** * ********* *** ***** * *****";
+            //maze[11] += "* *   *     * *   *     *     *   * *   * *       *   *         *   *";
+            //maze[12] += "* * * * ***** *** * ************* *** *** ***** * *** *********** ***";
+            //maze[13] += "*   *   *     * * *       *     *       *     * *   *       *   *   *";
+            //maze[14] += "* ******* ***** * ***** * * *** ******* ***** * *** ******* * * *** *";
+            //maze[15] += "*   *   * *       *   * *   *   *     *     * *   *   *   *   * *   *";
+            //maze[16] += "*** *** * * ******* * * * ******* *** ******* ***** * * ******* * ***";
+            //maze[17] += "*   *   * *         *   * *       * *       *   *   * *   *     * * *";
+            //maze[18] += "* *** *** ********* ******* ******* ******* *** * *** * * * ***** * *";
+            //maze[19] += "* *   *   *   *   * *     * *   *         * *   *   * * * *     *   *";
+            //maze[20] += "* * * * *** * * * *** *** * * * *** ***** * * ***** * *** ***** *** *";
+            //maze[21] += "*   * *     *   *       *     *     *     *         *         *     *";
+            //maze[22] += "* * *                                                           *****";
+            //maze[23] += "* * *                                                           *****";
+            //maze[24] += "* * *                                                           *****";
+            //maze[25] += "* * *                                                           *****";
+            //maze[26] += "* * *                                                           *****";
+            //maze[27] += "* * *                                                           *****";
+            //maze[28] += "* * *                                                           *****";
+            //maze[29] += "*********************************************************************";
+
+            //maze[0] += "*****************************************************************************************";
+            //maze[1] += "*     *         *         *         *         *                 *         *         *   *";
+            //maze[2] += "* *** *** * *** ******* * ***** *** ******* * ***** ***** ***** * * ***** * ******* * ***";
+            //maze[3] += "* * *   * * * *     *   *     * * *     *   *     * *     * *   * *     * * *       *   *";
+            //maze[4] += "* * *** * * * ***** * ******* * * ***** * ******* * * ***** * ********* * * * ********* *";
+            //maze[5] += "* * *   * * * *   *   *   *   * * *   *   *   *   * *   * *   *         *   *   *       *";
+            ////maze[6] += "* * * ***** * * * ******* * *** * * * ******* * ******* * * ***** ************* *** *****";
+            //maze[6] += "* * *                                                                               *****";
+            //maze[7] += "* *         *   * *       *     *   * *       *         *         *           *   *     *";
+            //maze[8] += "* * *********** * * * ************* * * * *************** *************** *** *** ***** *";
+            //maze[9] += "* *   *       * *   *       *     * *   *       *       *   *           *   *   * *     *";
+            //maze[10] += "* ***** ***** * ********* *** *** * ********* *** * *** *** * ********* *** ***** * *****";
+            //maze[11] += "* *   *     * *   *     *     * * *   *     *     *   * *   * *       *   *         *   *";
+            //maze[12] += "* * * * ***** *** * ************* *** * ************* *** *** ***** * *** *********** ***";
+            //maze[13] += "*   *   *     * * *       *       * * *       *     *       *     * *   *       *   *   *";
+            //maze[14] += "* ******* ***** * ***** * * ******* * ***** * * *** ******* ***** * *** ******* * * *** *";
+            //maze[15] += "*   *   * *       *   * *   *         *   * *   *   *     *     * *   *   *   *   * *   *";
+            //maze[16] += "*** *** * * ******* * * * ***** ******* * * * ******* *** ******* ***** * * ******* * ***";
+            //maze[17] += "*   *   * *         *   * *             *   * *       * *       *   *   * *   *     * * *";
+            //maze[18] += "* *** *** ********* ******* *********** ******* ******* ******* *** * *** * * * ***** * *";
+            //maze[19] += "* *   *   *   *   * *     * *     *   * *     * *   *         * *   *   * * * *     *   *";
+            //maze[20] += "* * * * *** * * * *** *** * * * * * * *** *** * * * *** ***** * * ***** * *** ***** *** *";
+            //maze[21] += "*   * *     *   *       *     * *   *       *     *     *     *         *         *     *";
+            //maze[22] += "* * *                                                                               *****";
+            //maze[23] += "* * *                                                                               *****";
+            //maze[24] += "* * *                                                                               *****";
+            //maze[25] += "* * *                                                                               *****";
+            //maze[26] += "* * *                                                                               *****";
+            //maze[27] += "* * *                                                                               *****";
+            //maze[28] += "* * *                                                                               *****";
+            //maze[29] += "*****************************************************************************************";
+
+            maze[0] += "*****************************************************************************************";
+            maze[1] += "*                                                                                       *";
+            maze[2] += "*     *****   ******   **    **    *****          ***     ******       **        *****  *";
+            maze[3] += "*  *********  ******  ***    ***  *** **         ****     ********    ****     ******** *";
+            maze[4] += "*  **         **      ***    **  ***             ** **    **    **   ** ***   ***       *";
+            maze[5] += "* ***  *****  ******  ***    **   *****         **  ***   ***** **   **  **   **        *";
+            maze[6] += "* ***    ***  **      ***    **       ***      **** ***   *****     **** ***  ***       *";
+            maze[7] += "*  ****  ***  ***      ***  ***  **   ***      **    ***  **       ***    ***  ****  *  *";
+            maze[8] += "*    ******   *******   ******   *******      ***     **  **       **      **   ******  *";
+            maze[9] += "*                                                                                       *";
+            maze[10] += "*                                                                                       *";
+            maze[11] += "*                                                                                       *";
+            maze[12] += "*                         *********                                                     *";
+            maze[13] += "*                            ***                                                        *";
+            maze[14] += "*                            ***      *****  *****   ************                       *";
+            maze[15] += "*                            ***    ***  ***     **  ***  ***  ***                      *";
+            maze[16] += "*                            ***    **** *** ******  **   **   **                       *";
+            maze[17] += "*                            ***    ***     ***  **  **   **   ***                      *";
+            maze[18] += "*                            ***      *****  *** **  **   **   ***                      *";
+            maze[19] += "*                                                                                       *";
+            maze[20] += "*                                                                                       *";
+            maze[21] += "*    ******          **           **                            ***                     *";
+            maze[22] += "*  ********          **           **                       **                           *";
+            maze[23] += "*  **         *****  **   *****   *******   ***** *****  ****** ***   *** *   *******   *";
+            maze[24] += "* ***       ***  *** **  ***  **  ***  ***  ***       **   **   *** ***   **  ***  ***  *";
+            maze[25] += "* ***       **** *** **  **** **  **    **  **    ******   **   *** **    *** **   ***  *";
+            maze[26] += "*  ******** ***      **  ***      ***  ***  **   ***  **   **   ***  **  ***  ***  ***  *";
+            maze[27] += "*    ******   *****  **    *****  **** *    **    *** **   **** ***   *****   **    **  *";
+            maze[28] += "*                                                                                       *";
+            maze[29] += "*****************************************************************************************";
 
             highScores = new List<HighScore>();
 
             players = new List<Player>();
-            for (short i = 0; i < 5; i++)
+            for (short i = 0; i < 15; i++)
             {
-                Player player=new Player();
+                Player player = new Player();
                 randomPosition(out short x, out short y);
                 player.x = x;
                 player.y = y;
@@ -100,7 +173,7 @@ namespace BlazorDungeon.Code
 
                 player.sounds = new List<bool>();
                 player.soundsTime = new List<DateTime>();
-                for (short s = 0; s < 6; s++)
+                for (short s = 0; s < 16; s++)
                 {
                     player.sounds.Add(false);
                     player.soundsTime.Add(DateTime.Now.AddDays(-1));
@@ -109,8 +182,8 @@ namespace BlazorDungeon.Code
                 players.Add(player);
             }
 
-            rows = new List<Row>[players.Count+1];
-            for (short i = 0; i < players.Count+1; i++)
+            rows = new List<Row>[players.Count + 1];
+            for (short i = 0; i < players.Count + 1; i++)
             {
                 Player player = new Player();
 
@@ -146,7 +219,7 @@ namespace BlazorDungeon.Code
             chStrawberry = Char.ConvertFromUtf32(127827);
 
             enemies = new List<Enemy>();
-            for (short i = 0; i < 10; i++)
+            for (short i = 0; i < 40; i++)
             {
                 Enemy enemy = new Enemy();
                 randomPosition(out short x, out short y);
@@ -157,31 +230,31 @@ namespace BlazorDungeon.Code
             }
 
             items = new List<Item>();
-            for (short i=0;i<50;i++)
+            for (short i = 0; i < 150; i++)
             {
                 Item item = new Item();
                 randomPosition(out short x, out short y);
                 item.x = x;
                 item.y = y;
 
-                if (i < 20) { item.type = 0; item.value = 10; item.sound = 1; }
-                else if (i < 35) { item.type = 1; item.value = 20; item.sound = 2; }
-                else if (i < 40) { item.type = 2; item.value = 30; item.sound = 3; }
-                else if (i < 45) { item.type = 3; item.value = 40; item.sound = 4; }
+                if (i < 50) { item.type = 0; item.value = 10; item.sound = 1; }
+                else if (i < 90) { item.type = 1; item.value = 20; item.sound = 2; }
+                else if (i < 115) { item.type = 2; item.value = 30; item.sound = 3; }
+                else if (i < 135) { item.type = 3; item.value = 40; item.sound = 4; }
                 else { item.type = 4; item.value = 50; item.sound = 5; }
 
                 items.Add(item);
             }
 
-            gameSpeed = 200;
+            mainGameSpeed = 125;
 
-            gameTimer = new System.Timers.Timer();
-            gameTimer.Interval = gameSpeed;
-            gameTimer.AutoReset = true;
-            gameTimer.Enabled = true;
+            mainGameTimer = new System.Timers.Timer();
+            mainGameTimer.Interval = mainGameSpeed;
+            mainGameTimer.AutoReset = true;
+            mainGameTimer.Enabled = true;
         }
 
-        public void step()
+        public void playerStep()
         {
             foreach (Player player in players)
             {
@@ -203,9 +276,9 @@ namespace BlazorDungeon.Code
                                     player.state = 1;
                                     break;
                                 default:
-                                    if (player.name.Length < 8) 
-                                    { 
-                                        if (player.keyDown[j].Length==1 && ((player.keyDown[j][0]>='a' && player.keyDown[j][0] <= 'z') || (player.keyDown[j][0] >= 'A' && player.keyDown[j][0] <= 'Z')))
+                                    if (player.name.Length < 8)
+                                    {
+                                        if (player.keyDown[j].Length == 1 && ((player.keyDown[j][0] >= 'a' && player.keyDown[j][0] <= 'z') || (player.keyDown[j][0] >= 'A' && player.keyDown[j][0] <= 'Z')))
                                         {
                                             player.name += player.keyDown[j];
                                             player.cursorX++;
@@ -239,7 +312,15 @@ namespace BlazorDungeon.Code
                             switch (player.keyDown[j])
                             {
                                 case "Enter":
-                                    player.score = 0;
+                                    if (player.score >= 1000)
+                                        player.score -= 1000;
+                                    else
+                                        player.score = 0;
+
+                                    randomPosition(out short x, out short y);
+                                    player.x = x;
+                                    player.y = y;
+
                                     player.state = 1;
                                     break;
                             }
@@ -280,6 +361,26 @@ namespace BlazorDungeon.Code
                 }
             }
 
+            foreach (Player player in players)
+            {
+                for (short j = 0; j < player.soundsTime.Count(); j++)
+                {
+                    if (player.soundsTime[j] < DateTime.Now)
+                    {
+                        player.sounds[j] = false;
+                    }
+                    else
+                    {
+                        player.sounds[j] = true;
+                    }
+                }
+            }
+
+            cursorVisible = !cursorVisible;
+        }
+
+        public void enemyStep()
+        {
             foreach (Enemy enemy in enemies)
             {
                 short ways = 0;
@@ -316,33 +417,18 @@ namespace BlazorDungeon.Code
                         else
                             enemy.direction = (short)r.Next(4);
                         break;
+                    default:
+                        break;
                 }
 
                 for (short j = 0; j < players.Count; j++)
                 {
-                    if (players[j].state==1 && enemy.x == players[j].x && enemy.y == players[j].y)
+                    if (players[j].state == 1 && enemy.x == players[j].x && enemy.y == players[j].y)
                     {
                         death(players[j]);
                     }
                 }
             }
-
-            foreach (Player player in players)
-            {
-                for (short j = 0; j < player.soundsTime.Count(); j++)
-                {
-                    if (player.soundsTime[j] < DateTime.Now)
-                    {
-                        player.sounds[j] = false;
-                    }
-                    else
-                    {
-                        player.sounds[j] = true;
-                    }
-                }
-            }
-
-            cursorVisible = !cursorVisible;
         }
 
         public void death(Player player)
@@ -364,20 +450,20 @@ namespace BlazorDungeon.Code
             randomPosition(out short x, out short y);
             player.x = x;
             player.y = y;
-            if (player.maxScoreSession < player.score) 
+            if (player.maxScoreSession < player.score)
                 player.maxScoreSession = player.score;
         }
 
         public void draw()
         {
-            for (short i = 0; i < players.Count+1; i++)
+            for (short i = 0; i < players.Count + 1; i++)
             {
-                drawLayout(rows[i],i);
+                drawLayout(rows[i], i);
                 drawMaze(rows[i]);
 
                 for (short j = 0; j < players.Count; j++)
                 {
-                    if (players[j].SessionId != Guid.Empty && players[j].state==1)
+                    if (players[j].SessionId != Guid.Empty && players[j].state == 1)
                     {
                         rows[i][players[j].y + 1].Cells[players[j].x + 1].character = chPlayer;
                         rows[i][players[j].y + 1].Cells[players[j].x + 1].cssClass = cssPlayer + (j + 1).ToString();
@@ -425,10 +511,10 @@ namespace BlazorDungeon.Code
                             drawBox((short)((widthDungeon / 2) - 10), (short)((heightDungeon / 2) - 4), (short)((widthDungeon / 2) + 11), (short)((heightDungeon / 2) + 4), cssMarginText, rows[i]);
                             drawText("WELCOME", (short)((widthDungeon / 2) - 3), (short)((heightDungeon / 2) - 3), cssMarginText, rows[i]);
                             drawText("INSERT YOUR NAME:", (short)((widthDungeon / 2) - 8), (short)((heightDungeon / 2) - 1), cssMarginText, rows[i]);
-                            drawText("        ", (short)((widthDungeon / 2) - 3), (short)((heightDungeon / 2)+1), cssTextBox, rows[i]);
+                            drawText("        ", (short)((widthDungeon / 2) - 3), (short)((heightDungeon / 2) + 1), cssTextBox, rows[i]);
                             drawText(players[i].name, (short)((widthDungeon / 2) - 3), (short)((heightDungeon / 2) + 1), cssTextBox, rows[i]);
                             drawText("PRESS ENTER TO START", (short)((widthDungeon / 2) - 9), (short)((heightDungeon / 2) + 3), cssMarginText, rows[i]);
-                            if (cursorVisible && players[i].name!=null && players[i].name.Length<8)
+                            if (cursorVisible && players[i].name != null && players[i].name.Length < 8)
                             {
                                 drawCharacter("_", players[i].cursorX, players[i].cursorY, cssTextBox, rows[i]);
                             }
@@ -439,10 +525,10 @@ namespace BlazorDungeon.Code
                             drawBox((short)((widthDungeon / 2) - 14), (short)((heightDungeon / 2) - 7), (short)((widthDungeon / 2) + 15), (short)((heightDungeon / 2) + 10), cssMarginText, rows[i]);
                             drawText("GAME OVER", (short)((widthDungeon / 2) - 4), (short)((heightDungeon / 2) - 6), cssMarginTitle, rows[i]);
                             drawText("YOUR SCORE: " + string.Format(" {0:000000}", players[i].score), (short)((widthDungeon / 2) - 9), (short)((heightDungeon / 2) - 5), cssMarginTitle, rows[i]);
-                            drawText("PRESS ENTER TO START", (short)((widthDungeon / 2) - 9), (short)((heightDungeon / 2) - 4), cssMarginTitle, rows[i]);
+                            drawText("PRESS ENTER TO CONTINUE", (short)((widthDungeon / 2) - 9), (short)((heightDungeon / 2) - 4), cssMarginTitle, rows[i]);
                             drawText("HIGH SCORES", (short)((widthDungeon / 2) - 5), (short)((heightDungeon / 2) - 2), cssMarginText, rows[i]);
                             drawText("NAME     " + " " + "SCORE " + " " + "DATE", (short)((widthDungeon / 2) - 13), (short)((heightDungeon / 2) - 1), cssMarginText, rows[i]);
-                            for (int j=0;j<highScores.Count() && j<10;j++)
+                            for (int j = 0; j < highScores.Count() && j < 10; j++)
                             {
                                 drawText(highScores[j].playerName.PadRight(8, ' ') + " " + string.Format(" {0:000000}", highScores[j].score) + " " + highScores[j].date.ToString("dd/MM/yyyy"), (short)((widthDungeon / 2) - 13), (short)((heightDungeon / 2) + j), cssMarginText, rows[i]);
                             }
@@ -454,9 +540,9 @@ namespace BlazorDungeon.Code
 
         public void drawMaze(IList<Row> rows)
         {
-            for (short y=0; y<heightDungeon; y++)
+            for (short y = 0; y < heightDungeon; y++)
             {
-                short x=0;
+                short x = 0;
                 CharEnumerator ch = maze[y].GetEnumerator();
                 while (ch.MoveNext())
                 {
@@ -471,7 +557,7 @@ namespace BlazorDungeon.Code
                             rows[y + 1].Cells[x + 1].cssClass = cssWall;
                             break;
                     }
-                    
+
                     x++;
                 }
             }
@@ -511,19 +597,19 @@ namespace BlazorDungeon.Code
                     rows[y].Cells[x].cssClass = cssMarginTitle;
                 }
 
-            string title = "BLAZOR DUNGEON v1.1";
+            string title = "GEUS APAC Team Celebration v20220411";
             drawText(title, (short)(((width - infopanelwidth) / 2) - (title.Length / 2)), 0, cssMarginTitle, rows);
 
-            drawText("SCORES", (short)(width - infopanelwidth + 3), 1, cssMarginText, rows);
+            drawText("SCORES", (short)(width - infopanelwidth + 3), 0, cssMarginText, rows);
 
-            short r = 3;
+            short r = 1;
             for (short i = 0; i < players.Count; i++)
             {
-                drawCharacter(chPlayer, (short)(width - infopanelwidth + 2), r, cssPlayer + (i+1).ToString(), rows);
+                drawCharacter(chPlayer, (short)(width - infopanelwidth + 2), r, cssPlayer + (i + 1).ToString(), rows);
                 drawText(string.Format(" {0:000000}", players[i].score), (short)(width - infopanelwidth + 3), r, cssPlayer + (i + 1).ToString(), rows);
                 r++;
-                if (players[i].state>0)
-                    drawText(players[i].name.PadRight(8,' '), (short)(width - infopanelwidth + 2), r, cssPlayer + (i + 1).ToString(), rows);
+                if (players[i].state > 0)
+                    drawText(players[i].name.PadRight(8, ' '), (short)(width - infopanelwidth + 2), r, cssPlayer + (i + 1).ToString(), rows);
                 else
                     drawText("        ", (short)(width - infopanelwidth + 2), r, cssPlayer + (i + 1).ToString(), rows);
                 r++;
@@ -531,24 +617,42 @@ namespace BlazorDungeon.Code
 
             if (playerNumber < players.Count)
             {
-                drawText("YOU ", (short)(width - infopanelwidth + 3), 15, cssMarginText, rows);
-                drawCharacter(chPlayer, (short)(width - infopanelwidth + 8), 15, cssPlayer + (playerNumber+1).ToString(), rows);
-            }else
+                drawText("YOU:", (short)(width - infopanelwidth -6), 0, cssMarginText, rows);
+                drawCharacter(chPlayer, (short)(width - infopanelwidth -2), 0, cssPlayer + (playerNumber + 1).ToString(), rows);
+            }
+            else
             {
-                drawText("ROOM FULL", (short)(width - infopanelwidth + 2), 15, cssRoomFull, rows);
+                drawText("ROOM FULL", (short)(width - infopanelwidth -10), 0, cssRoomFull, rows);
             }
 
-            drawText("POINTS", (short)(width - infopanelwidth + 3), 17, cssMarginText, rows);
-            drawCharacter(chCoin, (short)(width - infopanelwidth + 2), (short)(19), cssCoin, rows);
-            drawText(" 10    ", (short)(width - infopanelwidth + 3), (short)(19), cssCoin, rows);
-            drawCharacter(chCherrie, (short)(width - infopanelwidth + 2), (short)(20), cssCherrie, rows);
-            drawText(" 20    ", (short)(width - infopanelwidth + 3), (short)(20), cssCherrie,  rows);
-            drawCharacter(chGreenApple, (short)(width - infopanelwidth + 2), (short)(21), cssGreenApple,  rows);
-            drawText(" 30    ", (short)(width - infopanelwidth + 3), (short)(21), cssGreenApple, rows);
-            drawCharacter(chRedApple, (short)(width - infopanelwidth + 2), (short)(22), cssRedApple, rows);
-            drawText(" 40    ", (short)(width - infopanelwidth + 3), (short)(22), cssRedApple, rows);
-            drawCharacter(chStrawberry, (short)(width - infopanelwidth + 2), (short)(23), cssStrawberry, rows);
-            drawText(" 50    ", (short)(width - infopanelwidth + 3), (short)(23), cssStrawberry, rows);
+            //drawText("POINTS", (short)(width - infopanelwidth + 3), 18, cssMarginText, rows);
+            //drawCharacter(chCoin, (short)(width - infopanelwidth + 2), (short)(19), cssCoin, rows);
+            //drawText(" 10    ", (short)(width - infopanelwidth + 3), (short)(19), cssCoin, rows);
+            //drawCharacter(chCherrie, (short)(width - infopanelwidth + 2), (short)(20), cssCherrie, rows);
+            //drawText(" 20    ", (short)(width - infopanelwidth + 3), (short)(20), cssCherrie, rows);
+            //drawCharacter(chGreenApple, (short)(width - infopanelwidth + 2), (short)(21), cssGreenApple, rows);
+            //drawText(" 30    ", (short)(width - infopanelwidth + 3), (short)(21), cssGreenApple, rows);
+            //drawCharacter(chRedApple, (short)(width - infopanelwidth + 2), (short)(22), cssRedApple, rows);
+            //drawText(" 40    ", (short)(width - infopanelwidth + 3), (short)(22), cssRedApple, rows);
+            //drawCharacter(chStrawberry, (short)(width - infopanelwidth + 2), (short)(23), cssStrawberry, rows);
+            //drawText(" 50    ", (short)(width - infopanelwidth + 3), (short)(23), cssStrawberry, rows);
+
+            drawText("POINTS:", (short)(1), 31, cssMarginText, rows);
+
+            drawCharacter(chCoin, (short)(9), 31, cssCoin, rows);
+            drawText("=10 ", (short)(10), 31, cssCoin, rows);
+
+            drawCharacter(chCherrie, (short)(14), 31, cssCherrie, rows);
+            drawText("=20 ", (short)(15), 31, cssCherrie, rows);
+
+            drawCharacter(chGreenApple, (short)(19), 31, cssGreenApple, rows);
+            drawText("=30 ", (short)(20), 31, cssGreenApple, rows);
+
+            drawCharacter(chRedApple, (short)(24), 31, cssRedApple, rows);
+            drawText("=40 ", (short)(25), 31, cssRedApple, rows);
+
+            drawCharacter(chStrawberry, (short)(29), 31, cssStrawberry, rows);
+            drawText("=50", (short)(30), 31, cssStrawberry, rows);
         }
 
         public void drawBox(short x1, short y1, short x2, short y2, string cssClass, IList<Row> rows)
@@ -560,13 +664,13 @@ namespace BlazorDungeon.Code
                 drawCharacter(char.ConvertFromUtf32(61953), c, y1, "c", rows);
                 drawCharacter(char.ConvertFromUtf32(61959), c, y2, "c", rows);
             }
-            for (short r = (short)(y1+1); r < (short)(y2); r++)
+            for (short r = (short)(y1 + 1); r < (short)(y2); r++)
             {
                 drawCharacter(char.ConvertFromUtf32(61962), x1, r, "c", rows);
                 drawCharacter(char.ConvertFromUtf32(61956), x2, r, "c", rows);
             }
-            for (short c = (short)(x1+1); c < x2; c++)
-                for (short r = (short)(y1+1); r < (short)(y2); r++)
+            for (short c = (short)(x1 + 1); c < x2; c++)
+                for (short r = (short)(y1 + 1); r < (short)(y2); r++)
                 {
                     drawCharacter(" ", c, r, "c", rows);
                     drawCharacter(" ", c, r, "c", rows);

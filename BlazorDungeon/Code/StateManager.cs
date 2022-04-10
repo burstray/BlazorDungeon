@@ -30,8 +30,8 @@ namespace BlazorDungeon.Code
                     player.SessionId = Id;
                     player.state = 0;
                     player.name = "";
-                    player.cursorX = 31;
-                    player.cursorY = 12;
+                    player.cursorX = 41;
+                    player.cursorY = 16;
                     break;
                 }
             }

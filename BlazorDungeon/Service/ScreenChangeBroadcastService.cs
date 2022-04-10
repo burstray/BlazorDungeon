@@ -10,18 +10,25 @@ namespace BlazorDungeon.Service
     public class ScreenChangeBroadcastService : IScreenChangeBroadcastService
     {
         public Game game;
+        public int enemyState = 0;
 
         public event ScreenChangeDelegate OnScreenChanged;
 
         public ScreenChangeBroadcastService(IConfiguration configuration)
         {
-            game = new Game(80,25, configuration.GetValue<string>("BlazorDungeon:HighScoresFile"));
-            game.gameTimer.Elapsed += OnTimedEvent;
+            game = new Game(100,32, configuration.GetValue<string>("BlazorDungeon:HighScoresFile"));
+            game.mainGameTimer.Elapsed += OnTimedEvent;
         }
 
         private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            game.step();
+            game.playerStep();
+
+            enemyState++;
+            if (enemyState % 2 == 0)//相当于玩家2步，机器人1步
+            {
+                game.enemyStep();
+            }
             game.draw();
 
             if (this.OnScreenChanged != null)

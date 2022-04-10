@@ -15,7 +15,8 @@ pre {
     font-family: fairfaxhd, monospace;
     margin: 0;
     line-height: 1;
-    font-size: 3.75vh;
+    /*font-size: 3.75vh;*/
+    font-size: 3.07vh;
 }
 
 .a {
