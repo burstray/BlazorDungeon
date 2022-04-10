@@ -166,9 +166,9 @@ namespace BlazorDungeon.Code
             for (short i = 0; i < 15; i++)
             {
                 Player player = new Player();
-                randomPosition(out short x, out short y);
-                player.x = x;
-                player.y = y;
+                //randomPosition(out short x, out short y);
+                player.x = 64;
+                player.y = 16;
                 player.keyDown = new List<string>();
 
                 player.sounds = new List<bool>();
@@ -317,9 +317,9 @@ namespace BlazorDungeon.Code
                                     else
                                         player.score = 0;
 
-                                    randomPosition(out short x, out short y);
-                                    player.x = x;
-                                    player.y = y;
+                                    //randomPosition(out short x, out short y);
+                                    player.x = 63;
+                                    player.y = 16;
 
                                     player.state = 1;
                                     break;
@@ -597,7 +597,7 @@ namespace BlazorDungeon.Code
                     rows[y].Cells[x].cssClass = cssMarginTitle;
                 }
 
-            string title = "GEUS APAC Team Celebration v20220411";
+            string title = "GEUS APAC Team Celebration";
             drawText(title, (short)(((width - infopanelwidth) / 2) - (title.Length / 2)), 0, cssMarginTitle, rows);
 
             drawText("SCORES", (short)(width - infopanelwidth + 3), 0, cssMarginText, rows);

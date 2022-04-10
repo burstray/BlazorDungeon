@@ -50,29 +50,80 @@ pre {
 }
 
 .p1 {
-    color: DarkOrange;
+    color: red;
     background-color: black;
 }
 
 .p2 {
-    color: DarkGreen;
+    color: orange;
     background-color: black;
 }
 
 .p3 {
-    color: DarkTurquoise;
+    color: yellow;
     background-color: black;
 }
 
 .p4 {
-    color: DarkSlateGray;
+    color: green;
     background-color: black;
 }
 
 .p5 {
-    color: DarkOrchid;
+    color: cyan;
     background-color: black;
 }
+
+.p6 {
+    color: blue;
+    background-color: black;
+}
+
+.p7 {
+    color: purple;
+    background-color: black;
+}
+
+.p8 {
+    color: deeppink;
+    background-color: black;
+}
+
+.p9 {
+    color: deepskyblue;
+    background-color: black;
+}
+
+.p10 {
+    color:   silver ;
+    background-color: black;
+}
+
+.p11 {
+    color: maroon;
+    background-color: black;
+}
+
+.p12 {
+    color:   chartreuse;
+    background-color: black;
+}
+
+.p13 {
+    color:  grey;
+    background-color: black;
+}
+
+.p14 {
+    color:  plum;
+    background-color: black;
+}
+
+.p15 {
+    color:    mediumpurple;
+    background-color: black;
+}
+
 
 .g {
     color: gold;
